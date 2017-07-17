@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+require 'data_parser'
+
+n = ARGV[0].to_i || 100
+
+numbers = []
+source_number = []
+
+$stdin.each_char do |char|
+  if char =~ /\d/
+    source_number << char
+  else
+    if source_number.size > 0 && source_number.size < 1001
+      numbers = DataParser::Number.prepere_numbers(source_number, numbers, n)
+      source_number = []
+    end
+  end
+end
+
+puts numbers
